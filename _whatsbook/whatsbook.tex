@@ -1,0 +1,234 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+% =================================
+% whatsbook.tex
+% Created by Pelle Beckman, 2016
+% Modified by Kancelot To, 2019
+%
+% See medium.com/@pbeck and the post about
+% 'Books from WhatsApp' for more info. 
+% =================================
+
+%
+% Document setup
+%
+\documentclass[9pt, openany]{memoir} % Add/remove 'showtrims' to show trims
+\let\providelength\undefined
+\let\providecounter\undefined
+
+%\usepackage{showframe} % Great for "debugging" layouts
+
+%
+% Title & Author
+%
+\title{Title}
+\author{Author}
+
+%
+% Colours
+%
+\usepackage[dvipsnames]{xcolor}
+\definecolor{color1}{RGB}{33, 33, 33}
+\definecolor{color2}{RGB}{90, 181,191}
+\definecolor{color3}{RGB}{135, 191, 120}
+\definecolor{lightgray}{gray}{0.1}
+
+%
+% Type
+%
+\usepackage{blindtext}
+\usepackage[UKenglish]{babel}
+\usepackage[UKenglish]{isodate}
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage[hyphens]{url}
+\usepackage[pdfpagelayout=TwoPageRight]{hyperref}
+\hypersetup{%
+	colorlinks=true,
+	linkcolor=RoyalBlue,
+	urlcolor=RoyalBlue,
+	allbordercolors={0 0 0}
+}
+\usepackage{microtype} % Improves character and word spacing
+\usepackage{xeCJK}
+\usepackage{titlesec}
+
+\cleanlookdateon
+
+%
+% Stock & page size
+%
+\setstocksize{8.25in}{5.125in}
+\settrimmedsize{8in}{5in}{*}
+\settrims{0.125in}{0.125in}
+\setlrmarginsandblock{0.73in}{0.54in}{*}
+\setulmarginsandblock{0.45in}{0.75in}{*}
+%\setstocksize{9.25in}{6.125in}
+%\settrimmedsize{9in}{6in}{*}
+%\settrims{0.125in}{0.125in}
+%\setlrmarginsandblock{20mm}{18mm}{*}
+%\setulmarginsandblock{16mm}{28mm}{*}
+\checkandfixthelayout
+
+%
+% Font
+%
+\setmainfont[Ligatures=TeX,
+             BoldFont = {Ideal Sans Semibold},
+             BoldItalicFont = {Ideal Sans Semibold Italic}]{Ideal Sans Book}
+\setmonofont[Scale=MatchLowercase]{Consolas}
+\setCJKmainfont{Noto Sans CJK TC Regular}
+
+% Remove hypenation, see
+\usepackage[none]{hyphenat}
+
+%
+% Chapters
+%
+\usepackage{pagecolor}
+\usepackage[pages=some]{background}
+
+\backgroundsetup{
+    scale=1,
+    angle=0,
+    opacity=1,
+    contents={\includegraphics[width=\stockwidth,height=\stockheight]{a45b24635eb16823062050dd2f807369}}
+}
+\makechapterstyle{WABChapter}{%
+    \renewcommand*{\chapterheadstart}{\vspace*{140pt}}
+    \renewcommand{\chaptitlefont}{\huge \centering \fontspec[Letters=Uppercase, Scale=5]{Tungsten Medium}}
+    \renewcommand{\printchaptertitle}[1]{%
+        \chaptitlefont \color{black}\MakeUppercase{{##1}}
+        \vfill
+    }
+    \renewcommand{\printchaptername}{ }
+    \renewcommand{\chapternamenum}{ }
+    \renewcommand{\printchapternum}{ }
+}
+\chapterstyle{WABChapter}
+
+%
+% Sections
+%
+\usepackage{titlesec}
+\def\dotfill#1{\cleaders\hbox to #1{.}\hfill}
+\newcommand\dotline[2][.5em]{\leavevmode\hbox to #2{\dotfill{#1}\hfil}}
+
+\titleformat{\section}[display]
+{\filcenter\normalfont\fontspec[Numbers={Lining}, Scale=0.86]{Ideal Sans Semibold}}
+%{\thesection.}{0}{}[\dotline{0.3\linewidth}]
+{\thesection.}{0}{}[\rule{0.25\linewidth}{.35ex}]
+
+\titlespacing{\section}{0pt}{6pt}{0pt}
+
+%
+% Footers & Headings
+%
+\usepackage{nameref}
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\makeevenfoot{headings}{\scriptsize\fontspec[Numbers={Lining}]{Ideal Sans Book}\thepage}{}{}
+\makeoddfoot{headings}{}{}{\scriptsize\fontspec[Numbers={Lining}]{Ideal Sans Book}\thepage}
+\makeevenhead{headings}{}{}{}
+\makeoddhead{headings}{}{}{}
+
+\copypagestyle{chapter}{plain} % make chapter a page style of its own
+\makeevenfoot{chapter}{}{}{}
+\makeoddfoot{chapter}{}{}{}
+\makeevenhead{chapter}{}{}{}
+\makeoddhead{chapter}{}{}{}
+
+%
+% User styling
+%
+\newcommand{\kancelot}[0]{\textsc{kt}}
+\newcommand{\cecilia}[0]{\textsc{cc}}
+
+%
+% Content
+%
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize\color{gray}}
+
+\usepackage{longtable}
+\newcolumntype{R}{r>{\raggedright\arraybackslash}}
+
+\usepackage{epigraph}
+\setlength{\epigraphrule}{0pt}
+\setlength{\epigraphwidth}{0.3\textwidth}
+
+\usepackage{pgfornament}
+
+
+%
+% Images
+%
+\graphicspath{ {./images/} }
+\usepackage{float}
+\usepackage[export]{adjustbox} % For frames
+\usepackage{caption}
+
+%
+% Emojis
+%
+\usepackage{ifxetex}
+\usepackage{ifluatex}
+\ifxetex
+	\usepackage[ios,font=seguiemj.ttf]{emoji}
+	\usepackage{fontspec}
+\else
+	\ifluatex
+		\usepackage[ios,font=Symbola_hint.ttf]{emoji}
+		\usepackage{fontspec}
+	\else
+		\usepackage[T1]{fontenc}
+		\usepackage[utf8]{inputenc}
+		\usepackage[ios]{emoji}
+	\fi
+\fi
+
+% PDF/X-3 stuff, necessary for Blurb IF USING xelatex
+\special{pdf:docinfo <<
+    /Title (Title)                                          % set your title here
+    /Author (Authors)                                       % set author name
+    /Subject (Everyday conversation)                        % set subject
+    /Keywords (everyday conversation, chat logs, memoir)    % set keywords
+    /Trapped (False)
+    /GTS_PDFXVersion (PDF/X-3:2002)
+    % must have a trim box, but I think Blurb ignores the values
+    % /TrimBox [0.00000 9.00000 684.36000 585.00000] >>
+}
+\special{pdf:put @catalog <<
+    /OutputIntents [ <<
+    /Info (none)
+    /Type /OutputIntent
+    /S /GTS_PDFX
+    /OutputConditionIdentifier (Blurb.com)
+    /RegistryName (http://www.color.org/)
+    >> ] >>
+}
+
+%
+% Page breaks
+%
+%\raggedbottom
+
+%
+% Document
+%
+\usepackage{newclude}
+
+\begin{document}
+
+\OnehalfSpacing
+
+\frontmatter
+\include{whatsbook-front-matter}
+
+\mainmatter
+\include{whatsbook-folio}
+
+\end{document}
