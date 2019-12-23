@@ -30,12 +30,12 @@ Pretty much based off and forked from <https://medium.com/@pbeck/whatsapp-books-
 * There's some manual processing involved here to get sticker icons working properly here; I couldn't find an automated way.
 
 
-## THEN
+# THEN
 
 * Run `interleave_fb_line_whatsapp.py` to merge all chats into one file.
 
 
-## FINALLY
+# FINALLY
 
 * Run `_whatsbook/wa2latex.py` to generate a XeLaTeX file, `whatsbook-folio.tex`.
 
@@ -43,4 +43,4 @@ Pretty much based off and forked from <https://medium.com/@pbeck/whatsapp-books-
 
 * Make a cover in InDesign.
 
-* I manufactured the book on [Blurb](www.blurb.com).
+* I manufactured the book on [Blurb](http://www.blurb.com).
